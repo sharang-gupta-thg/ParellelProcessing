@@ -1,4 +1,4 @@
-# ParellelProcessing
+# Parallel Processing
 Demonstration of Async processing in Java to improve performance
 
 # How to run
