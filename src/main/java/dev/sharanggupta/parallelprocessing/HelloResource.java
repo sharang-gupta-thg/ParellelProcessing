@@ -34,14 +34,13 @@ public class HelloResource {
         long start = System.currentTimeMillis();
 
         CompletableFuture<String> future1
-                = CompletableFuture.supplyAsync(() -> helloService.serviceOneApiCall());
+                = CompletableFuture.supplyAsync(() -> helloService.serviceOneApiCall()).exceptionallyAsync(e->"API 1 failed");
 
         CompletableFuture<String> future2
-                = CompletableFuture.supplyAsync(() -> helloService.serviceTwoApiCall());
+                = CompletableFuture.supplyAsync(() -> helloService.serviceTwoApiCall()).exceptionallyAsync(e->"API 2 failed");
 
         CompletableFuture<String> future3
-                = CompletableFuture.supplyAsync(() -> helloService.databaseCall());
-
+                = CompletableFuture.supplyAsync(() -> helloService.databaseCall()).exceptionallyAsync(e->"database failed");
 
         CompletableFuture<Void> combinedFuture
                 = CompletableFuture.allOf(future1, future2, future3);
